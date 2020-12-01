@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var data = {
         expId: null,
         resultsTable: {},
-        resultsView: {}
+        resultsView: {},
+        renderedTasks: []
     }
 
     const updateState = () => {
@@ -14,8 +15,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         fetch('http://localhost:8888/api/exp/getResultView?expId=' + data.expId)
             .then(resp => resp.json())
             .then(listing => {
-                console.log(listing)
                 data.resultsView = listing
+            })
+        fetch('http://localhost:8888/api/exp/listRenderedTasks?expId=' + data.expId)
+            .then(resp => resp.json())
+            .then(listing => {
+                data.renderedTasks = listing.tasks
             })
     }
 

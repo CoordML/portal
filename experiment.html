@@ -24,50 +24,16 @@
             #{{ expId }}
         </div>
         <h4 class="section"># Tasks</h4>
-        <div class="row task-title">
+        <div class="row task-title" v-for="task in renderedTasks">
             <div class="col s6">
-                <h3 class="task-title">Task 1</h3>
-            </div>
-            <div class="col s6">
-                <h3 class="task-title right-align exp-progress">Running</h3>
+                <h3 class="task-title">@{{ task.taskId }}</h3>
             </div>
             <div class="col s6">
-                <div class="exp-subtitle">
-                    #1e932e1
-                </div>
-            </div>
-            <div class="col s6">
-                <div class="right-align exp-subtitle">Status</div>
-            </div>
-            <div class="col s2">
-                <div class="task-args">Executable</div>
-            </div>
-            <div class="col s10">
-                <div class="task-args">main.py</div>
-            </div>
-            <div class="col s2">
-                <div class="task-args">Args</div>
-            </div>
-            <div class="col s10">
-                <div class="task-args">seed = 123 <br /> base_model = "DAutoInt"</div>
-            </div>
-            <div class="col s2">
-                <div class="task-args">Tags</div>
-            </div>
-            <div class="col s10">
-                <div class="task-args">seed = 123 <br /> base_model = "DAutoInt"</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s6">
-                <h3 class="task-title">Task 2</h3>
-            </div>
-            <div class="col s6">
-                <h3 class="task-title right-align exp-progress">Done</h3>
+                <h3 class="task-title right-align exp-progress">{{ task.status }}</h3>
             </div>
             <div class="col s6">
                 <div class="exp-subtitle">
-                    #1e932e1
+                    {{ task.executable }}
                 </div>
             </div>
             <div class="col s6">
@@ -77,13 +43,13 @@
                 <div class="task-args">Args</div>
             </div>
             <div class="col s10">
-                <div class="task-args">seed = 123 <br /> base_model = "DAutoInt"</div>
+                <div class="task-args" v-html="task.args"></div>
             </div>
             <div class="col s2">
                 <div class="task-args">Tags</div>
             </div>
             <div class="col s10">
-                <div class="task-args">seed = 123 <br /> base_model = "DAutoInt"</div>
+                <div class="task-args" v-html="task.tags"></div>
             </div>
         </div>
         <h4 class="section"># Results</h4>
