@@ -1,5 +1,26 @@
-
 document.addEventListener("DOMContentLoaded", function (event) {
+    var data = {
+        expOverviews: [
+        ]
+    }
+
+    var app = new Vue({
+        el: "#app",
+        data: data,
+        created: function() {
+        }
+    })
+
+    const updateState = () => {
+        fetch('http://localhost:8888/api/exp/listOverview')
+            .then(resp => resp.json())
+            .then(listing => {
+                data.expOverviews = listing.experiments
+            })
+    }
+
+    setInterval(updateState, 1000);
+
     Chart.defaults.global.defaultColor = '#48BEFF'
     for (var i = 0; i < 8; i++) {
         var ctx = document.getElementById('gpu-canvas_1_' + i).getContext('2d');
@@ -58,13 +79,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
             },
         });
     }
-
-    var data = {
-        a: 1
-    }
-
-    var app = new Vue({
-        el: "#app",
-        data: data
-    })
 });

@@ -19,16 +19,16 @@
             Coord<b>ML</b> <span class="title-portal">Portal</span> <span class="title-version">v0.0.0</span>
         </h1>
         <h4 class="section"># Experiments</h4>
-        <div class="row">
+        <div class="row" v-for="exp in expOverviews" :key="exp.expId">
             <div class="col s6">
-                <h3><a class='link' href='experiment.html'>Test</a></h3>
+                <h3><a class='link' v-bind:href="'experiment.html?expId=' + exp.expId">{{ exp.title }}</a></h3>
             </div>
             <div class="col s6">
-                <h3 class="right-align exp-progress">37.2%</h3>
+                <h3 class="right-align exp-progress">{{ (exp.progress * 100).toFixed(1) }}%</h3>
             </div>
             <div class="col s6">
                 <div class="exp-subtitle">
-                #1e932e1
+                #{{ exp.expId }}
                 </div>
             </div>
             <div class="col s6">
