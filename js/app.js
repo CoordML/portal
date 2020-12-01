@@ -85,9 +85,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
         workers: []
     }
 
+    const updateState = () => {
+        fetch('http://localhost:8888/api/exp/listOverview')
+            .then(resp => resp.json())
+            .then(listing => {
+                data.expOverviews = listing.experiments
+            })
+        fetch('http://localhost:8888/api/workers/list')
+            .then(resp => resp.json())
+            .then(listing => {
+                data.workers = listing.workers
+                renderGpuUsage(data.workers)
+            })
+    }
+
+
     var app = new Vue({
         el: "#app",
         data: data,
+        created: function() {
+            updateState()
+        },
         computed: {
             workerOverviews: function () {
                 return this.workers.map((worker, idx) => {
@@ -111,20 +129,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         }
     })
-
-    const updateState = () => {
-        fetch('http://localhost:8888/api/exp/listOverview')
-            .then(resp => resp.json())
-            .then(listing => {
-                data.expOverviews = listing.experiments
-            })
-        fetch('http://localhost:8888/api/workers/list')
-            .then(resp => resp.json())
-            .then(listing => {
-                data.workers = listing.workers
-                renderGpuUsage(data.workers)
-            })
-    }
 
     setInterval(updateState, 1000);
 });
