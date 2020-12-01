@@ -36,46 +36,23 @@
             </div>
         </div>
         <h4 class="section"># Runner Instances</h4>
-        <div class="row">
+        <div class="row" v-for="worker in workerOverviews" :key="worker.workerId">
             <div class="col s6">
-                <h3>Instance 1</h3>
+                <h3>{{ worker.name }}</h3>
             </div>
             <div class="col s6">
-                <h3 class="right-align exp-progress">87.6%</h3>
+                <h3 class="right-align exp-progress">{{ (worker.overallLoad * 100).toFixed(1) }}%</h3>
             </div>
             <div class="col s6">
                 <div class="exp-subtitle">
-                #1e932e1
+                #{{ worker.workerId }}
                 </div>
             </div>
             <div class="col s6">
                 <div class="right-align exp-subtitle">Overall GPU Load</div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_0" width="400" height="400"></canvas>
-            </div>
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_1" width="400" height="400"></canvas>
-            </div>
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_2" width="400" height="400"></canvas>
-            </div>
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_3" width="400" height="400"></canvas>
-            </div>
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_4" width="400" height="400"></canvas>
-            </div>
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_5" width="400" height="400"></canvas>
-            </div>
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_6" width="400" height="400"></canvas>
-            </div>
-            <div class="col l3 m6">
-                <canvas id="gpu-canvas_1_7" width="400" height="400"></canvas>
+            <div class="col l3 m6" v-for="i in worker.gpuNum">
+                <canvas v-bind:id="'gpu-canvas_' + worker.workerId + '_' + i" width="400" height="400"></canvas>
             </div>
         </div>
     </div>
