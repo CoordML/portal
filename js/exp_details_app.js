@@ -6,18 +6,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
         renderedTasks: []
     }
 
+    const rootUrl = window.location.protocol == 'file:' ? 'http://localhost:8888' : ''
+
     const updateState = () => {
-        fetch('http://localhost:8888/api/exp/listResults?expId=' + data.expId)
+        fetch(rootUrl + '/api/exp/listResults?expId=' + data.expId)
             .then(resp => resp.json())
             .then(listing => {
                 data.resultsTable = listing
             })
-        fetch('http://localhost:8888/api/exp/getResultView?expId=' + data.expId)
+        fetch(rootUrl + '/api/exp/getResultView?expId=' + data.expId)
             .then(resp => resp.json())
             .then(listing => {
                 data.resultsView = listing
             })
-        fetch('http://localhost:8888/api/exp/listRenderedTasks?expId=' + data.expId)
+        fetch(rootUrl + '/api/exp/listRenderedTasks?expId=' + data.expId)
             .then(resp => resp.json())
             .then(listing => {
                 data.renderedTasks = listing.tasks

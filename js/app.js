@@ -85,13 +85,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
         workers: []
     }
 
+    const rootUrl = window.location.protocol == 'file:' ? 'http://localhost:8888' : ''
+
     const updateState = () => {
-        fetch('http://localhost:8888/api/exp/listOverview')
+        fetch(rootUrl + '/api/exp/listOverview')
             .then(resp => resp.json())
             .then(listing => {
                 data.expOverviews = listing.experiments
             })
-        fetch('http://localhost:8888/api/workers/list')
+        fetch(rootUrl + '/api/workers/list')
             .then(resp => resp.json())
             .then(listing => {
                 data.workers = listing.workers
